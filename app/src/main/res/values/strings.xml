@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Food_Order_App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="featuredText">Featured</string>
+    <string name="popularText">Popular restaurants near you</string>
+    <string name="subMenuText">What are you looking for ? </string>
+    <string name="mustTry">Must try!!</string>
+    <string name="recommendText">Whats on your mind!!</string>
+    <string name="rating_reviews">Rating  Review</string>
+</resources>
