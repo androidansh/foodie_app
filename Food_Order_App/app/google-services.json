@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1012551080101",
+    "firebase_url": "https://foodie-food-shopping-app-default-rtdb.firebaseio.com",
+    "project_id": "foodie-food-shopping-app",
+    "storage_bucket": "foodie-food-shopping-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012551080101:android:561055867522e5ec71554c",
+        "android_client_info": {
+          "package_name": "com.example.food_order_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKnLDeWH-Dve7NAh9MUHNLkg2wVE7tWI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

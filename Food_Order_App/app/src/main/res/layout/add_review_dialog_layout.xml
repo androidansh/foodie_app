@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="@dimen/_5sdp"
+    android:gravity="center"
+    android:layout_width="@dimen/_280sdp"
+    android:background="@color/bgColor"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:elevation="@dimen/_10sdp"
+        android:background="@color/primary_color"
+        android:fontFamily="@font/roboto_semi_bold"
+        android:gravity="center"
+        android:text="Add Review"
+        android:textColor="@color/btn_click_color"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reviewText"
+        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColor"
+        android:fontFamily="@font/roboto_semi_bold"
+        android:hint="Review"
+        android:textColorHint="@color/textColor"
+        app:boxStrokeColor="@color/btn_click_color"
+        app:counterEnabled="true"
+        app:counterMaxLength="100"
+        app:cursorColor="@color/btn_click_color"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/btn_click_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:prefixTextAppearance="@dimen/_13sdp"
+        app:prefixTextColor="@color/btn_click_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reviewTextData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_semi_bold"
+            android:inputType="text"
+            android:singleLine="false"
+            android:textColor="@color/headingColor1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        android:background="@color/bgColor"
+        android:numStars="5"
+        android:progressBackgroundTint="#9E9E9E"
+        android:progressTint="@color/btn_click_color"
+        android:rating="1"
+        android:secondaryProgressTint="#00FFFFFF"
+        android:stepSize="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelReview"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_25sdp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/blue_round_corner_btn"
+        android:elevation="@dimen/_10sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Cancel"
+        android:textColor="@color/btn_click_color"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirmReview"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_25sdp"
+        android:background="@drawable/blue_round_corner_btn"
+        android:elevation="@dimen/_10sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Confirm"
+        android:textColor="@color/btn_click_color"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

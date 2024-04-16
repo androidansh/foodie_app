@@ -1,0 +1,6 @@
+order unique id = payment string actual length = 18 in which 8 letter from left are common
+eg => 1) pay_NxRdbhqUK4Pi2h -> unique = bhqUK4Pi2h
+      2) pay_NxRdq8gT4NhUuF -> unique = q8gT4NhUuF
+
+
+new feature to implement : add restaurants and thier and data
