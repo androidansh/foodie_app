@@ -11,12 +11,11 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.food_order_app.cart_n_place_order.CartActivity
-import com.example.food_order_app.Food_detailed_Activity
+import com.example.food_order_app.IndividualActivity.Food_detailed_Activity
 import com.example.food_order_app.R
 import com.example.food_order_app.home_screen.HomeScreenActivity
 import com.example.food_order_app.model.CartFood
@@ -44,7 +43,7 @@ class Cart_Item_Adapter(private var foodArray:ArrayList<CartFood>) : RecyclerVie
 
         holder.foodPic.setOnClickListener {
             HomeScreenActivity.clickedFood = food
-            context.startActivity(Intent(CartActivity.context,Food_detailed_Activity::class.java))
+            context.startActivity(Intent(CartActivity.context, Food_detailed_Activity::class.java))
         }
         holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){

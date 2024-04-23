@@ -54,7 +54,6 @@ class SearchActivity : AppCompatActivity() {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             // this function is called when text is edited
-            //Log.i("my_msg",s.toString())
             if(found_food_array.size != 0){
                 found_food_array.removeAll(found_food_array.toSet())
             }
@@ -68,12 +67,10 @@ class SearchActivity : AppCompatActivity() {
                     }
                 }
             }
-
+            if(s.toString() == ""){
+                found_food_array.removeAll(found_food_array.toSet())
+            }
             adapter.notifyDataSetChanged()
-            Log.i("my_msg","found products = ${found_food_array.size}")
-
-
-
         }
 
         override fun afterTextChanged(s: Editable) {

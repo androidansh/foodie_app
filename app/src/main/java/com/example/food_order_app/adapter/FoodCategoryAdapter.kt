@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.food_order_app.FoodCategoryActivity
+import com.example.food_order_app.IndividualActivity.FoodCategoryActivity
 import com.example.food_order_app.R
 import com.example.food_order_app.home_screen.HomeScreenActivity
 import com.example.food_order_app.model.FoodCategoryModel
@@ -37,7 +37,7 @@ class FoodCategoryAdapter(private var foodList: ArrayList<FoodCategoryModel>): R
         Glide.with(context).load(foodList[position].foodCategoryPic).into(holder.food)
         holder.foodName.text = foodList[position].foodCategoryName
         holder.food.setOnClickListener {
-            val intent = Intent(HomeScreenActivity.myContext,FoodCategoryActivity::class.java)
+            val intent = Intent(HomeScreenActivity.myContext, FoodCategoryActivity::class.java)
             intent.putExtra("category",foodList[position].foodCategoryName)
             context.startActivity(intent)
         }

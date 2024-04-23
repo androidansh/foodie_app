@@ -100,7 +100,7 @@ class AddReviewActivity : AppCompatActivity() {
         val confirm : Button = dialog.findViewById(R.id.confirmEditReview)
         val reviewText: TextInputEditText = dialog.findViewById(R.id.editReviewTextData)
         val deleteReview:ImageView = dialog.findViewById(R.id.deleteReview)
-        var review_point = 1
+        var review_point: Int
         val reviewBar:RatingBar = dialog.findViewById(R.id.editRatingBar)
 
         // setting default value for views
@@ -127,45 +127,48 @@ class AddReviewActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val review = ReviewClass()
+            Food_detailed_Activity.h = "edit"
             review.reviewText = reviewText.text.toString()
             review.reviewPoint = review_point
             review.reviewerName = HomeScreenActivity.foodieUser.userName
             review.reviewUID = HomeScreenActivity.foodieUser.userUid
             HomeScreenActivity.clickedFood!!.foodRating[0] = review
-            Food_detailed_Activity.reviewAdapter.notifyDataSetChanged()
+            Food_detailed_Activity.reviewAdapter.notifyItemChanged(0)
             reviewList[0] = review
             // replacing old review with new one
             var c = 0F
             for(i in HomeScreenActivity.clickedFood!!.foodRating){
-                // can be optimised if the review arraylist become so large
+            // can be optimised if the review arraylist become so large
                 c += i.reviewPoint
             }
             c /= HomeScreenActivity.clickedFood!!.foodRating.size
             HomeScreenActivity.clickedFood!!.foodRatingPoint = c.toString()
-
-            adapter.notifyDataSetChanged()
-
-            updateReviewInDB()
+            adapter.notifyItemChanged(0)
+            CoroutineScope(Dispatchers.IO).launch {
+                updateReviewInDB()
+            }
 
         }
 
         deleteReview.setOnClickListener {
            // reviewList.removeAt(0)
-            HomeScreenActivity.clickedFood!!.foodRating.removeAt(0)
-            adapter.notifyDataSetChanged()
-            Food_detailed_Activity.reviewAdapter.notifyDataSetChanged()
+            HomeScreenActivity.clickedFood!!.foodRating.remove(reviewFood)
+            adapter.notifyItemRangeRemoved(0,1)
+            Food_detailed_Activity.reviewAdapter.notifyItemRangeRemoved(0,1)
 
             var c = 0F
+            Food_detailed_Activity.h = "delete"
             for(i in HomeScreenActivity.clickedFood!!.foodRating){
-                // can be optimised if the review arraylist become so large
+            // can be optimised if the review arraylist become so large
                 c += i.reviewPoint
             }
             c /= (HomeScreenActivity.clickedFood!!.foodRating.size)
             HomeScreenActivity.clickedFood!!.foodRatingPoint = c.toString()
+            CoroutineScope(Dispatchers.IO).launch {
+                updateReviewInDB()
+            }
+
             dialog.dismiss()
-            updateReviewInDB()
-
-
         }
         dialog.show()
     }
@@ -176,7 +179,7 @@ class AddReviewActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.add_review_dialog_layout)
         dialog.window?.setBackgroundDrawableResource(R.drawable.white_round_corner_btn)
 
-        var review_point = 0
+        var review_point = 1
         val cancel: Button = dialog.findViewById(R.id.cancelReview)
         val confirm : Button = dialog.findViewById(R.id.confirmReview)
         val reviewText: TextInputEditText = dialog.findViewById(R.id.reviewTextData)
@@ -200,11 +203,12 @@ class AddReviewActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             review.reviewText = reviewText.text.toString()
+            Log.i("my+msg","Review Point = $review_point")
             review.reviewPoint = review_point
             review.reviewerName = HomeScreenActivity.foodieUser.userName
             review.reviewUID = HomeScreenActivity.foodieUser.userUid
             HomeScreenActivity.clickedFood!!.foodRating.add(review)
-
+            Food_detailed_Activity.h = "edit"
 
             var c:Float = 0F;
             for(i in HomeScreenActivity.clickedFood!!.foodRating){
@@ -215,14 +219,15 @@ class AddReviewActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
 
             dialog.dismiss()
-            updateReviewInDB()
+            CoroutineScope(Dispatchers.IO).launch {
+                updateReviewInDB()
+            }
         }
         dialog.show()
     }
 
     private fun updateReviewInDB(){
-        Log.i("my_msg","Sending updated review to db of ${HomeScreenActivity.clickedFood!!.foodUID}")
-        Log.i("my_msg","No of reviews = ${HomeScreenActivity.clickedFood!!.foodRating.size}")
+//        Log.i("my_msg","Sending updated review to db of ${HomeScreenActivity.clickedFood!!.foodUID}")
         val doc = FirebaseFirestore.getInstance().collection("all_food").document(HomeScreenActivity.clickedFood!!.foodUID)
         doc.update("foodRating",HomeScreenActivity.clickedFood!!.foodRating).addOnSuccessListener {
             doc.update("foodRatingPoint",HomeScreenActivity.clickedFood!!.foodRatingPoint).addOnSuccessListener {
@@ -245,7 +250,7 @@ class AddReviewActivity : AppCompatActivity() {
                         cartFood.foodUID = food.foodUID
                         cartFood.foodBuyers = food.foodBuyers
                         HomeScreenActivity.clickedFood = cartFood
-                        adapter.notifyDataSetChanged()
+                        //adapter.notifyDataSetChanged()
                         Food_detailed_Activity.reviewAdapter.notifyDataSetChanged()
                     }
                 }.addOnFailureListener {
@@ -257,6 +262,7 @@ class AddReviewActivity : AppCompatActivity() {
         }.addOnFailureListener {
             Log.i("my_msg","Error in updating review of food")
         }
+        Log.i("my_msg","No of review after thread = ${HomeScreenActivity.clickedFood!!.foodRating.size}")
         Log.i("my_msg","Success in Sending updated review to db of ${HomeScreenActivity.clickedFood!!.foodUID}")
 
     }

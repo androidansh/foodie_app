@@ -36,6 +36,7 @@ android {
     }
 
     buildFeatures {
+        dataBinding = true
         viewBinding = true
     }
 }
@@ -81,8 +82,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.browser:browser:1.8.0")
 
-
-
+    implementation("com.google.android.material:material:1.11.0")
     // flex box
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 

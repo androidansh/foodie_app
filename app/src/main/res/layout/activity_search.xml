@@ -22,6 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
+            android:background="@color/bgColor"
             android:layout_height="@dimen/_40sdp"
             android:padding="@dimen/_5sdp">
 
@@ -40,12 +41,11 @@
                 android:id="@+id/search_activity_bar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@color/bgColor"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:backgroundTintMode="@null"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="type food name or place name"
-                
                 android:singleLine="true"
                 android:textColor="@color/headingColor1"
                 android:textColorHint="#A6A6A6"

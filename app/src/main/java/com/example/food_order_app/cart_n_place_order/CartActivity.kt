@@ -25,6 +25,7 @@ class CartActivity : AppCompatActivity() {
     private lateinit var back:ImageView
     private lateinit var windowFrame: Window
     private var totalFoodCost:Int = 0
+    private var isNotifyIntent = false
 
     companion object{
         @SuppressLint("StaticFieldLeak")
@@ -39,6 +40,13 @@ class CartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
+
+        val intent  = intent.getStringExtra("type")
+        if(intent.equals("NotifyIntent")){
+            isNotifyIntent = true
+        }
+
+
         cartTotal = findViewById(R.id.cartCost)
         context = applicationContext
 
@@ -92,5 +100,12 @@ class CartActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         foodAdapter.notifyDataSetChanged()
+    }
+
+    override fun onBackPressed() {
+        if(isNotifyIntent){
+            startActivity(Intent(CartActivity.context,HomeScreenActivity::class.java))
+        }
+        super.onBackPressed()
     }
 }

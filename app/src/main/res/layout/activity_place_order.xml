@@ -147,7 +147,7 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/orderTime"
                         android:layout_width="@dimen/_200sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -183,7 +183,7 @@
                         android:textColor="@color/headingColor1"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+                        app:layout_constraintTop_toBottomOf="@+id/orderTime" />
 
                     <TextView
                         android:id="@+id/totalCharges"
@@ -307,12 +307,25 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/TrackOrder"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/dark_blue_round_corners"
+                    android:fontFamily="@font/roboto_semi_bold"
+                    android:padding="@dimen/_5sdp"
+                    android:capitalize="words"
+                    android:text="Track Order"
+                    android:textColor="@color/bgColor"
+                    android:textSize="@dimen/_18sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/orderTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_25sdp"
@@ -43,7 +43,7 @@
         android:textSize="@dimen/_35sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toEndOf="@+id/orderTime"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -56,7 +56,7 @@
         android:textSize="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/orderTime" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"

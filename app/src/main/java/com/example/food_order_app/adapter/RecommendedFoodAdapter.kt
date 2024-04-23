@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.food_order_app.Food_detailed_Activity
+import com.example.food_order_app.IndividualActivity.Food_detailed_Activity
 import com.example.food_order_app.R
 import com.example.food_order_app.home_screen.HomeScreenActivity
 import com.example.food_order_app.model.CartFood
@@ -52,7 +52,7 @@ class RecommendedFoodAdapter(private var foodList:ArrayList<FoodItemsData>) : Re
             cartFood.foodUID = food.foodUID
             cartFood.foodBuyers = food.foodBuyers
             HomeScreenActivity.clickedFood = cartFood
-            context.startActivity(Intent(HomeScreenActivity.myContext,Food_detailed_Activity::class.java))
+            context.startActivity(Intent(HomeScreenActivity.myContext, Food_detailed_Activity::class.java))
         }
     }
 

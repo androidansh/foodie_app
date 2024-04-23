@@ -63,18 +63,12 @@ class HomeFrag : Fragment() {
             context?.startActivity(Intent(HomeScreenActivity.myContext,SearchActivity::class.java))
         }
 
-//        val a:ArrayList<FoodCategoryModel> = ArrayList()
-//        a.add(FoodCategoryModel("",""))
-//        parentFoodList.add(ParentAdapterParameter(ArrayList(),a,
-//            LinearLayoutManager(context),"search"
-//        ))
-
         if(!HomeScreenActivity.isItemSettedInHomeFrag){
-            Toast.makeText(HomeScreenActivity.myContext,"no item got",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(HomeScreenActivity.myContext,"no item got",Toast.LENGTH_SHORT).show()
             getFeaturedData()
         }
         else{
-            Toast.makeText(HomeScreenActivity.myContext,"Item Already got",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(HomeScreenActivity.myContext,"Item Already got",Toast.LENGTH_SHORT).show()
             parentFoodList.add(
                 ParentAdapterParameter(
                     ArrayList(),
@@ -105,25 +99,6 @@ class HomeFrag : Fragment() {
 
 
         return view
-    }
-
-    private fun loadHomeFragData() {
-        /*
-        use this when all the data is coming from firebase
-         */
-        val featured = CoroutineScope(Dispatchers.Default).async {
-            getFeaturedData()
-        }
-
-        val recommended = CoroutineScope(Dispatchers.Default).async {
-            featured.await()
-            getRecommendedDataFormDB()
-        }
-//        val loadRecommend = CoroutineScope(Dispatchers.Default).async {
-//            recommended.await()
-//            LoadRecommend()
-//        }
-
     }
 
     private fun getFeaturedData() {
@@ -192,7 +167,7 @@ class HomeFrag : Fragment() {
                         for (j in it.documents) {
                             val id = j["food_id"]
                             val doc = db.collection("all_food").document(id.toString())
-                            //Log.i("my_msg","geeting data of ${j["food_id"]}")
+                            //Log.i("my_msg","getting data of ${j["food_id"]}")
                             doc.get().addOnSuccessListener {data ->
 
                                 val food: FoodItemsData? = data.toObject(FoodItemsData::class.java)
@@ -200,7 +175,7 @@ class HomeFrag : Fragment() {
                                     HomeScreenActivity.recommendedSnack.add(food)
                                 }
                                 if(HomeScreenActivity.recommendedSnack.size == 2){
-                                    Log.i("my_msg","Only two food got")
+//                                    Log.i("my_msg","Only two food got")
                                     parentFoodList.add(
                                         ParentAdapterParameter(
                                             HomeScreenActivity.recommendedSnack,
@@ -232,7 +207,7 @@ class HomeFrag : Fragment() {
 //                    )
 //                )
                 parentAdapter.notifyDataSetChanged()
-                Log.i("my_msg", "All food got")
+//                Log.i("my_msg", "All food got")
             }, 1000)
             HomeScreenActivity.isItemSettedInHomeFrag = true
 
@@ -264,20 +239,20 @@ class HomeFrag : Fragment() {
 //
 //    }
 
-    private var textWatcher: TextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            // this function is called before text is edited
-        }
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            // this function is called when text is edited
-            Log.i("my_msg",s.toString())
-            //("text is edited and onTextChangedListener is called.")
-        }
-
-        override fun afterTextChanged(s: Editable) {
-            // this function is called after text is edited
-        }
-    }
+//    private var textWatcher: TextWatcher = object : TextWatcher {
+//        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+//            // this function is called before text is edited
+//        }
+//
+//        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+//            // this function is called when text is edited
+//            Log.i("my_msg",s.toString())
+//            //("text is edited and onTextChangedListener is called.")
+//        }
+//
+//        override fun afterTextChanged(s: Editable) {
+//            // this function is called after text is edited
+//        }
+//    }
 
 }

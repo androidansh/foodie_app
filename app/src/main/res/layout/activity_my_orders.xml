@@ -9,10 +9,10 @@
     tools:context=".cart_n_place_order.My_OrdersActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout11"
+        android:id="@+id/orderHeading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/bgColor"
+        android:background="@drawable/bottom_horizontal_line"
         android:padding="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,10 +45,35 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderRecycler"
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
+        app:layout_constraintTop_toBottomOf="@+id/orderHeading" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/orderAnimLayout"
+        android:layout_width="@dimen/_80sdp"
+        android:visibility="invisible"
+        android:layout_height="@dimen/_80sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/among_us" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

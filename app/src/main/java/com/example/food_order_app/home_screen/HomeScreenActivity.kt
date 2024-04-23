@@ -1,7 +1,9 @@
 package com.example.food_order_app.home_screen
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,12 +16,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import com.example.food_order_app.R
-import com.example.food_order_app.coroutine_tasks.FeaturesSnacks
+import com.example.food_order_app.cart_n_place_order.CartActivity
+import com.example.food_order_app.coroutine_tasks.ThreadTasks
 import com.example.food_order_app.model.CartFood
 import com.example.food_order_app.model.FoodCategoryModel
 import com.example.food_order_app.model.FoodItemsData
 import com.example.food_order_app.model.FoodieUser
-import com.example.food_order_app.model.OrderFood
+import com.example.food_order_app.model.OrderFoodDB
 import com.google.common.reflect.TypeToken
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,6 +47,8 @@ class HomeScreenActivity : AppCompatActivity() {
     private lateinit var walletTExt:TextView
     companion object{
 
+        lateinit var pendingIntent:PendingIntent
+
         lateinit var myContext: Context
         var featuredSnack:ArrayList<FoodCategoryModel> = ArrayList()
         var dinnerSubMenu:ArrayList<FoodCategoryModel> = ArrayList()
@@ -54,52 +59,58 @@ class HomeScreenActivity : AppCompatActivity() {
         lateinit var windowFrame: Window
         var isItemSettedInHomeFrag:Boolean = false
         lateinit var userCartMap:HashMap<String,CartFood>
-        var userOrders:ArrayList<OrderFood> = ArrayList()
         lateinit var foodieUser:FoodieUser
         var search_all_food_map:HashMap<String,FoodItemsData> = HashMap()
         var search_food_key_word:HashMap<String,ArrayList<String>> = HashMap()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen_activity)
         myContext = applicationContext
+        ThreadTasks.context = myContext
+//        CoroutineScope(Dispatchers.Main).launch{
+//            ThreadTasks.syncUserData()
+//        }
+        val intent: Intent = Intent(this, CartActivity::class.java)
+        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("type","NotifyIntent")
+        pendingIntent = PendingIntent.getActivity(this, 2, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val userPref = getSharedPreferences("FoodieUser", MODE_PRIVATE)
         if(userPref.getString("user_data","") == ""){
-            val doc = FirebaseFirestore.getInstance().collection("FoodieUser").document(FirebaseAuth.getInstance().currentUser!!.uid)
-            doc.get().addOnSuccessListener {
-                foodieUser = it.toObject(FoodieUser::class.java)!!
-                val gson = Gson()
-                val jsonStr = gson.toJson(foodieUser)
-                val edit = userPref.edit()
-                edit.putString("user_data",jsonStr)
-                edit.apply()
-            }.addOnFailureListener {
-                Log.i("my_msg","Error in getting current user data")
+            CoroutineScope(Dispatchers.IO).launch{
+                ThreadTasks.syncUserData()
             }
         }else{
-            val gson = Gson()
+//            CoroutineScope(Dispatchers.IO).launch{
+//                ThreadTasks.syncUserData()
+//            }
+            val gson = Gson() // getting user data stored in shared pref
             val str = userPref.getString("user_data","")
             if(str != ""){
                 foodieUser = gson.fromJson(str,FoodieUser::class.java)
+                //userOrders = foodieUser.orders
+                foodieUser.orders.sort()
             }
+            val pref = getSharedPreferences("UserCartData", MODE_PRIVATE) // getting user cart data from shared pref
+            val jsonStr = pref.getString("cartFood","")
+            val type = object : TypeToken<HashMap<String,CartFood>>() {}.type
+            userCartMap = if(jsonStr == ""){
+                HashMap()
+            }
+            else{
+                Log.i("my_msg","Data = $jsonStr")
+                gson.fromJson(jsonStr,type)
+            }
+
         }
 
         windowFrame = this.window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 
-        val pref = getSharedPreferences("UserCartData", MODE_PRIVATE)
-        val gson = Gson()
-        val jsonStr = pref.getString("cartFood","")
-        val type = object : TypeToken<HashMap<String,CartFood>>() {}.type
-        userCartMap = if(jsonStr == ""){
-                             HashMap()
-                    }
-                    else{
-                            gson.fromJson(jsonStr,type)
-                    }
 
         relative1 = findViewById(R.id.relative1)
         relative2 = findViewById(R.id.relative2)
@@ -222,7 +233,7 @@ class HomeScreenActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             // getting featured food
             val def1 = CoroutineScope(Dispatchers.IO).launch {
-                FeaturesSnacks.getFeaturedFood()
+                ThreadTasks.getFeaturedFood()
             }
 
 

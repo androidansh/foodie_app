@@ -33,6 +33,7 @@ class Food_detailed_Activity : AppCompatActivity() {
 
     companion object {
         lateinit var context1: Context
+        var h = "nothing"
         lateinit var reviewAdapter :ReviewAdapter
     }
 
@@ -107,11 +108,14 @@ class Food_detailed_Activity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         reviewAdapter.notifyDataSetChanged()
+
+        Log.i("my_msg","Total number of reviews  back with= ${HomeScreenActivity.clickedFood!!.foodRating.size}")
         val ratings: Float? = HomeScreenActivity.clickedFood!!.foodRatingPoint.toFloatOrNull()
         if (ratings != null) {
             binding.ratingBar.rating = ratings
         }
         binding.numRatings.text ="(${HomeScreenActivity.clickedFood!!.foodRating.size} ratings)"
+
 
     }
 

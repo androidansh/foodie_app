@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Food_detailed_Activity">
+    tools:context=".IndividualActivity.Food_detailed_Activity">
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/floatingActionButton"-->
@@ -266,6 +266,7 @@
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/reviewRecycler_1"

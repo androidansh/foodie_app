@@ -2,7 +2,6 @@ package com.example.food_order_app.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.food_order_app.Food_detailed_Activity
+import com.example.food_order_app.IndividualActivity.Food_detailed_Activity
 import com.example.food_order_app.R
 import com.example.food_order_app.home_screen.HomeScreenActivity
 import com.example.food_order_app.home_screen.SearchActivity
@@ -50,7 +49,7 @@ class found_food_adapter(private var foodArray:ArrayList<FoodItemsData>) : Recyc
             cartFood.foodUID = food.foodUID
             cartFood.foodBuyers = food.foodBuyers
             HomeScreenActivity.clickedFood = cartFood
-            context.startActivity(Intent(SearchActivity.search_context,Food_detailed_Activity::class.java))
+            context.startActivity(Intent(SearchActivity.search_context, Food_detailed_Activity::class.java))
         }
         holder.foodRating.text = "Rated ${foodArray[position].foodRatingPoint} with ${foodArray[position].foodRating.size}"
 
